@@ -109,6 +109,13 @@ public class CentralMojo extends SuperMojo {
 
 
     protected void processArtifact(ArtifactInfo artifactInfo) {
+        String gav = artifactInfo.groupId + ":" + artifactInfo.artifactId + ":pom:" + artifactInfo.version;
+        getLog().info("send " + gav);
+        sendGav(gav, artifactInfo.lastModified);
+    }
+
+
+    protected void processArtifactAsync( ArtifactInfo artifactInfo ) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Callable<Object> task = new MyCallable(artifactInfo);
 

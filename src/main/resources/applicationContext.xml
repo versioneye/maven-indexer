@@ -76,6 +76,11 @@
         <property name="language" value="Clojure" />
     </bean>
 
+    <bean id="sprayio" class="versioneye.domain.Repository" >
+        <property name="name"     value="sprayio" />
+        <property name="src"      value="http://repo.spray.io" />
+        <property name="repoType" value="Maven2" />
+    </bean>
 
     <!-- END Maven Repositories -->
 
