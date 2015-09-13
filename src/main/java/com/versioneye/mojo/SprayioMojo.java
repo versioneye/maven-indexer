@@ -10,7 +10,7 @@ import versioneye.persistence.IMavenRepostoryDao;
 import versioneye.persistence.IProductDao;
 import versioneye.service.ProductService;
 
-@Mojo( name = "pentaho", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
+@Mojo( name = "sprayio", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
 public class SprayioMojo extends CentralMojo {
 
 
