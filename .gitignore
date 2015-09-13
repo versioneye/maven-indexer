@@ -29,9 +29,8 @@ versioneye.sublime-workspace
 
 maven-indexer.iml
 
-maven-indexer.iml
-
 maven-indexer.ipr
 
 maven-indexer.iws
 
+/target/*
