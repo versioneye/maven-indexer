@@ -34,6 +34,13 @@ public class Repo1IndexMojo extends CentralMojo {
 
             productService     = (ProductService) context.getBean("productService");
 
+            String env = System.getenv("RAILS_ENV");
+            GlobalSetting gs = globalSettingDao.getBy(env, "mvn_repo_1_type");
+            if (!gs.getValue().equals("maven_index")){
+                getLog().info("Skip repo1index because mvn_repo_1_type is not maven_index");
+                return ;
+            }
+
             fetchUserAndPassword();
             String baseUrl = fetchBaseUrl();
 
