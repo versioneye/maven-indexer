@@ -1,6 +1,8 @@
 package com.versioneye.mojo;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -21,6 +23,8 @@ import versioneye.service.ProductService;
 @Mojo( name = "repo1index", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
 public class Repo1IndexMojo extends CentralMojo {
 
+    static final Logger logger = LogManager.getLogger(Repo1IndexMojo.class.getName());
+
     private String username;
     private String password;
 
@@ -37,7 +41,7 @@ public class Repo1IndexMojo extends CentralMojo {
             String env = System.getenv("RAILS_ENV");
             GlobalSetting gs = globalSettingDao.getBy(env, "mvn_repo_1_type");
             if (!gs.getValue().equals("maven_index")){
-                getLog().info("Skip repo1index because mvn_repo_1_type is not maven_index");
+                logger.info("Skip repo1index because mvn_repo_1_type is not maven_index");
                 return ;
             }
 
@@ -55,7 +59,7 @@ public class Repo1IndexMojo extends CentralMojo {
                 }
             }
         } catch( Exception exception ){
-            getLog().error(exception);
+            logger.error(exception);
             throw new MojoExecutionException("Oh no! Something went wrong. Get in touch with the VersionEye guys and give them feedback.", exception);
         }
     }
@@ -63,7 +67,7 @@ public class Repo1IndexMojo extends CentralMojo {
     private void crawlUrl(String baseUrl, int count){
         try{
             String name = "MavenInternal" + count;
-            getLog().info("-- Starting to crawl " + name + " with base Url: " + baseUrl);
+            logger.info("-- Starting to crawl " + name + " with base Url: " + baseUrl);
 
             mavenRepository = new MavenRepository();
             mavenRepository.setName(name);
@@ -76,17 +80,17 @@ public class Repo1IndexMojo extends CentralMojo {
 
             super.doUpdateFromIndex();
         } catch (Exception ex){
-            getLog().error(ex);
+            logger.error(ex);
         }
     }
 
     private String fetchBaseUrl(){
         String env = System.getenv("RAILS_ENV");
-        getLog().info("fetchBaseUrl for env: " + env );
+        logger.info("fetchBaseUrl for env: " + env );
         try{
             GlobalSetting gs = globalSettingDao.getBy(env, "mvn_repo_1");
             String url = gs.getValue();
-            getLog().info(" - mvn_repo_1: " + url);
+            logger.info(" - mvn_repo_1: " + url);
             return url;
         } catch( Exception ex){
             ex.printStackTrace();

@@ -1,6 +1,8 @@
 package com.versioneye.mojo;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -13,6 +15,8 @@ import versioneye.service.ProductService;
 
 @Mojo( name = "pentaho", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
 public class PenthaoMojo extends CentralMojo {
+
+    static final Logger logger = LogManager.getLogger(PenthaoMojo.class.getName());
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         try{
@@ -27,7 +31,7 @@ public class PenthaoMojo extends CentralMojo {
 
             super.doUpdateFromIndex();
         } catch( Exception exception ){
-            getLog().error(exception);
+            logger.error(exception);
             throw new MojoExecutionException("Oh no! Something went wrong. Get in touch with the VersionEye guys and give them feedback.", exception);
         }
     }

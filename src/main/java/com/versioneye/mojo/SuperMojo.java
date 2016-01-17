@@ -2,6 +2,8 @@ package com.versioneye.mojo;
 
 import com.versioneye.utils.PropertiesUtils;
 import com.versioneye.utils.RepositoryUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -31,6 +33,8 @@ import java.util.Properties;
  * The Mother of all Mojos!
  */
 public abstract class SuperMojo extends AbstractMojo {
+
+    static final Logger logger = LogManager.getLogger(SuperMojo.class.getName());
 
     @Component
     protected RepositorySystem system;
@@ -73,7 +77,7 @@ public abstract class SuperMojo extends AbstractMojo {
             globalSettingDao = (IGlobalSettingDao) context.getBean("globalSettingDao");
             httpUtils = (HttpUtils) context.getBean("httpUtils");
         } catch (Exception ex){
-            getLog().error(ex);
+            logger.error(ex);
         }
     }
 
@@ -97,7 +101,7 @@ public abstract class SuperMojo extends AbstractMojo {
         for (RemoteRepository repo : repos) {
             repo.getPolicy(false).setUpdatePolicy("always");
         }
-        getLog().info("There are " + repos.size() + " remote repositories in the list");
+        logger.info("There are " + repos.size() + " remote repositories in the list");
     }
 
     protected void addAllRepos(){
@@ -111,7 +115,7 @@ public abstract class SuperMojo extends AbstractMojo {
             remoteRepository.getPolicy(false).setUpdatePolicy("always");
             repos.add(remoteRepository);
         }
-        getLog().info("There are " + repos.size() + " remote repositories in the list");
+        logger.info("There are " + repos.size() + " remote repositories in the list");
     }
 
     protected String getCacheDirectory(String name) throws Exception {
@@ -122,7 +126,7 @@ public abstract class SuperMojo extends AbstractMojo {
             directory.delete();
         }
         directory.mkdir();
-        getLog().info("cache directory for Indexer: " + directory.getAbsolutePath());
+        logger.info("cache directory for Indexer: " + directory.getAbsolutePath());
         return directory.getAbsolutePath();
     }
 
@@ -134,7 +138,7 @@ public abstract class SuperMojo extends AbstractMojo {
             directory.delete();
         }
         directory.mkdir();
-        getLog().info("index directory for Indexer: " + directory.getAbsolutePath());
+        logger.info("index directory for Indexer: " + directory.getAbsolutePath());
         return directory.getAbsolutePath();
     }
 

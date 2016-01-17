@@ -1,31 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<log4j:configuration debug="true"
-                     xmlns:log4j='http://jakarta.apache.org/log4j/'>
-
-    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm:ss} %5p %c{1} - %m%n"/>
-        </layout>
-    </appender>
-
-    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
-        <param name="append" value="false"/>
-        <param name="file" value="out/learning.log"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
-        </layout>
-    </appender>
-
-    <root>
-        <level value="INFO"/>
-        <appender-ref ref="consoleAppender"/>
-        <!--<appender-ref ref="fileAppender"/>-->
-    </root>
-
-    <logger name="org.springframework.beans" additivity="true">
-        <level value="info" />
-        <appender-ref ref="consoleAppender" />
-    </logger>
-
-</log4j:configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="/mnt/logs/crawlj_indexer.log"
+                     filePattern="/mnt/logs/$${date:yyyy-MM}/${name}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/> <!-- every 10 MB -->
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <!--<File name="File" fileName="/mnt/logs/crawlj.log" bufferedIO="false" MaxFileSize="10MB" MaxBackupIndex="10" >-->
+        <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />-->
+        <!--</File>-->
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>

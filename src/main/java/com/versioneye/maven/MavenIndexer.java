@@ -1,5 +1,7 @@
 package com.versioneye.maven;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.BooleanClause.Occur;
@@ -31,6 +33,8 @@ import java.util.*;
 //import org.apache.maven.wagon.providers.http.HttpWagon;
 
 public class MavenIndexer {
+
+    static final Logger logger = LogManager.getLogger(MavenIndexer.class.getName());
 
     private final PlexusContainer plexusContainer;
     private final Indexer indexer;
@@ -88,17 +92,17 @@ public class MavenIndexer {
      * Preferred frequency is once a week.
      */
     public void updateIndex(String username, String password) throws IOException, ComponentLookupException, InvalidVersionSpecificationException {
-        System.out.println( "Updating Index..." );
-        System.out.println( "This might take a while on first run, so please be patient!" );
+        logger.info("Updating Index...");
+        logger.info("This might take a while on first run, so please be patient!");
         // Create ResourceFetcher implementation to be used with IndexUpdateRequest
         // Here, we use Wagon based one as shorthand, but all we need is a ResourceFetcher implementation
         TransferListener listener = new AbstractTransferListener() {
             public void transferStarted( TransferEvent transferEvent ) {
-                System.out.print( "  Downloading " + transferEvent.getResource().getName() );
+                logger.info("  Downloading " + transferEvent.getResource().getName());
             }
             public void transferProgress( TransferEvent transferEvent, byte[] buffer, int length ){ }
             public void transferCompleted( TransferEvent transferEvent ) {
-                System.out.println( " - Done" );
+                logger.info(" - Done");
             }
         };
 
@@ -114,14 +118,14 @@ public class MavenIndexer {
         IndexUpdateRequest updateRequest    = new IndexUpdateRequest( centralContext, resourceFetcher );
         IndexUpdateResult updateResult      = indexUpdater.fetchAndUpdateIndex( updateRequest );
         if ( updateResult.isFullUpdate() ) {
-            System.out.println( "Full update happened!" );
+            logger.info("Full update happened!");
         }
         else if ( updateResult.getTimestamp().equals( centralContextCurrentTimestamp ) ) {
-            System.out.println( "No update needed, index is up to date!" );
+            logger.info("No update needed, index is up to date!");
         }
         else {
-            System.out.println( "Incremental update happened, change covered " + centralContextCurrentTimestamp
-                    + " - " + updateResult.getTimestamp() + " period." );
+            logger.info("Incremental update happened, change covered " + centralContextCurrentTimestamp
+                    + " - " + updateResult.getTimestamp() + " period.");
         }
     }
 
@@ -156,7 +160,7 @@ public class MavenIndexer {
                     final Document doc = ir.document( i );
                     final ArtifactInfo ai = IndexUtils.constructArtifactInfo( doc, centralContext );
 
-                    System.out.println( ai.groupId + ":" + ai.artifactId + ":" + ai.version + ":" + ai.classifier + "." + ai.fextension + " (sha1=" + ai.sha1 + ")" );
+                    logger.info( ai.groupId + ":" + ai.artifactId + ":" + ai.version + ":" + ai.classifier + "." + ai.fextension + " (sha1=" + ai.sha1 + ")" );
                 }
             }
         } finally {

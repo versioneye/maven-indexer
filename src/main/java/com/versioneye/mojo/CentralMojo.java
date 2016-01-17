@@ -4,6 +4,8 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.versioneye.maven.MavenIndexer;
 import com.versioneye.service.RabbitMqService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
@@ -30,6 +32,8 @@ import java.util.concurrent.*;
 @Mojo( name = "central", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
 public class CentralMojo extends SuperMojo {
 
+    static final Logger logger = LogManager.getLogger(CentralMojo.class.getName());
+
     protected ProductService productService;
 
     protected final static String QUEUE_NAME = "maven_index_worker";
@@ -38,7 +42,6 @@ public class CentralMojo extends SuperMojo {
 
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        System.out.println("execute");
         try{
             super.execute();
             ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -51,7 +54,7 @@ public class CentralMojo extends SuperMojo {
 
             doUpdateFromIndex();
         } catch( Exception exception ){
-            getLog().error(exception);
+            logger.error(exception);
             throw new MojoExecutionException("Oh no! Something went wrong. Get in touch with the VersionEye guys and give them feedback.", exception);
         }
     }
@@ -80,8 +83,8 @@ public class CentralMojo extends SuperMojo {
 
             closeTheRabbit();
         } catch (Exception ex){
-            getLog().error(ex);
-            getLog().error("ERROR in doUpdateFromIndex" + ex.getMessage());
+            logger.error(ex);
+            logger.error("ERROR in doUpdateFromIndex" + ex.getMessage());
         }
     }
 
@@ -103,14 +106,14 @@ public class CentralMojo extends SuperMojo {
 
             processArtifact(artifactInfo);
         } catch (Exception ex) {
-            getLog().error(ex);
+            logger.error(ex);
         }
     }
 
 
     protected void processArtifact(ArtifactInfo artifactInfo) {
         String gav = artifactInfo.groupId + ":" + artifactInfo.artifactId + ":pom:" + artifactInfo.version;
-        getLog().info("send " + gav);
+        logger.info("send " + gav);
         sendGav(gav, artifactInfo.lastModified);
     }
 
@@ -123,14 +126,14 @@ public class CentralMojo extends SuperMojo {
         try {
             future.get(30, TimeUnit.MINUTES);
         } catch (TimeoutException ex) {
-            getLog().error("Timeout Exception for " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version + " - " + ex);
-            getLog().error(ex);
+            logger.error("Timeout Exception for " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version + " - " + ex);
+            logger.error(ex);
         } catch (InterruptedException ex) {
-            getLog().error("Interrupted Exception: " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version + " - " + ex);
-            getLog().error(ex);
+            logger.error("Interrupted Exception: " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version + " - " + ex);
+            logger.error(ex);
         } catch (ExecutionException ex) {
-            getLog().error("Execution Exception: " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version + " - " + ex);
-            getLog().error(ex);
+            logger.error("Execution Exception: " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version + " - " + ex);
+            logger.error(ex);
         } finally {
             future.cancel(true);
         }
@@ -146,7 +149,7 @@ public class CentralMojo extends SuperMojo {
         }
 
         public Object call() throws Exception {
-            getLog().info("send " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version);
+            logger.info("send " + artifactInfo.groupId + ":" + artifactInfo.artifactId + ":" + artifactInfo.version);
             String gav = artifactInfo.groupId + ":" + artifactInfo.artifactId + ":pom:" + artifactInfo.version;
             sendGav(gav, artifactInfo.lastModified);
             return null;
@@ -159,10 +162,10 @@ public class CentralMojo extends SuperMojo {
             String message = mavenRepository.getName() + "::" + mavenRepository.getUrl() + "::" + gav + "::" + lastModified;
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-            getLog().info(" [x] Sent '" + message + "'");
+            logger.info(" [x] Sent '" + message + "'");
         } catch (Exception exception) {
-            getLog().error("urlToPom: " + gav);
-            getLog().error(exception);
+            logger.error("urlToPom: " + gav);
+            logger.error(exception);
         }
     }
 
@@ -178,9 +181,9 @@ public class CentralMojo extends SuperMojo {
             }
             connection = RabbitMqService.getConnection(rabbitmqAddr, new Integer(rabbitmqPort));
             channel = connection.createChannel();
-            getLog().info("Connected to RabbitMQ " + rabbitmqAddr + ":" + rabbitmqPort);
+            logger.info("Connected to RabbitMQ " + rabbitmqAddr + ":" + rabbitmqPort);
         } catch (Exception exception){
-            getLog().error(exception);
+            logger.error(exception);
         }
     }
 
@@ -189,9 +192,9 @@ public class CentralMojo extends SuperMojo {
         try{
             channel.close();
             connection.close();
-            getLog().info("Connection to RabbitMQ closed.");
+            logger.info("Connection to RabbitMQ closed.");
         } catch (Exception exception){
-            getLog().error(exception);
+            logger.error(exception);
         }
     }
 
