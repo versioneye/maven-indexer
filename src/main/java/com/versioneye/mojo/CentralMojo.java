@@ -4,8 +4,8 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.versioneye.maven.MavenIndexer;
 import com.versioneye.service.RabbitMqService;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
@@ -23,7 +23,6 @@ import versioneye.service.ProductService;
 
 import java.util.Properties;
 import java.util.concurrent.*;
-
 
 /**
  * Fetches the index from the maven central repository and walks through the index

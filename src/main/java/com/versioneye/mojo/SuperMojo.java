@@ -2,8 +2,8 @@ package com.versioneye.mojo;
 
 import com.versioneye.utils.PropertiesUtils;
 import com.versioneye.utils.RepositoryUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

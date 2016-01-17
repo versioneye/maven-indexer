@@ -1,7 +1,7 @@
 package com.versioneye.maven;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.BooleanClause.Occur;
@@ -160,7 +160,7 @@ public class MavenIndexer {
                     final Document doc = ir.document( i );
                     final ArtifactInfo ai = IndexUtils.constructArtifactInfo( doc, centralContext );
 
-                    logger.info( ai.groupId + ":" + ai.artifactId + ":" + ai.version + ":" + ai.classifier + "." + ai.fextension + " (sha1=" + ai.sha1 + ")" );
+                    logger.info(ai.groupId + ":" + ai.artifactId + ":" + ai.version + ":" + ai.classifier + "." + ai.fextension + " (sha1=" + ai.sha1 + ")" );
                 }
             }
         } finally {
