@@ -40,7 +40,7 @@ public class Repo1IndexMojo extends CentralMojo {
 
             String env = System.getenv("RAILS_ENV");
             GlobalSetting gs = globalSettingDao.getBy(env, "mvn_repo_1_type");
-            if (!gs.getValue().equals("maven_index")){
+            if (gs == null || !gs.getValue().equals("maven_index")){
                 logger.info("Skip repo1index because mvn_repo_1_type is not maven_index");
                 return ;
             }
