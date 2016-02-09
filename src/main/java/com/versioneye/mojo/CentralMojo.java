@@ -159,7 +159,7 @@ public class CentralMojo extends SuperMojo {
     protected void sendGav(String gav, long lastModified){
         try{
             String message = mavenRepository.getName() + "::" + mavenRepository.getUrl() + "::" + gav + "::" + lastModified;
-            channel.queueDeclare(QUEUE_NAME, false, false, true, null);
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
             logger.info(" [x] Sent '" + message + "'");
         } catch (Exception exception) {
