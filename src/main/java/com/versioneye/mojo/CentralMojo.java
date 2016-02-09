@@ -180,7 +180,9 @@ public class CentralMojo extends SuperMojo {
             }
             connection = RabbitMqService.getConnection(rabbitmqAddr, new Integer(rabbitmqPort));
             channel = connection.createChannel();
-            logger.info("Connected to RabbitMQ " + rabbitmqAddr + ":" + rabbitmqPort);
+            String msg = "Connected to RabbitMQ " + rabbitmqAddr + ":" + rabbitmqPort;
+            logger.info(msg);
+            System.out.println(msg);
         } catch (Exception exception){
             logger.error(exception);
         }
@@ -191,7 +193,9 @@ public class CentralMojo extends SuperMojo {
         try{
             channel.close();
             connection.close();
-            logger.info("Connection to RabbitMQ closed.");
+            String msg = "Connection to RabbitMQ closed.";
+            logger.info(msg);
+            System.out.println(msg);
         } catch (Exception exception){
             logger.error(exception);
         }
