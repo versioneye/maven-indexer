@@ -112,7 +112,9 @@ public class CentralMojo extends SuperMojo {
 
     protected void processArtifact(ArtifactInfo artifactInfo) {
         String gav = artifactInfo.groupId + ":" + artifactInfo.artifactId + ":pom:" + artifactInfo.version;
-        logger.info("send " + gav);
+        String msg = "send " + gav;
+        logger.info(msg);
+        System.out.println(msg);
         sendGav(gav, artifactInfo.lastModified);
     }
 
