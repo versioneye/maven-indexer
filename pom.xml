@@ -150,6 +150,14 @@
     <plugins>
       <plugin>
         <groupId>com.versioneye</groupId>
+        <artifactId>versioneye-maven-plugin</artifactId>
+        <version>3.9.0</version>
+        <configuration>
+          <!--<apiKey>b7f7c65e66d38f511fb2</apiKey>-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.versioneye</groupId>
         <artifactId>maven-indexer</artifactId>
         <version>1.1.0</version>
       </plugin>
