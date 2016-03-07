@@ -53,7 +53,7 @@ public class CentralMojo extends SuperMojo {
 
             doUpdateFromIndex();
         } catch( Exception exception ){
-            logger.error(exception);
+            logger.error(exception.getStackTrace());
             throw new MojoExecutionException("Oh no! Something went wrong. Get in touch with the VersionEye guys and give them feedback.", exception);
         }
     }
@@ -105,16 +105,14 @@ public class CentralMojo extends SuperMojo {
 
             processArtifact(artifactInfo);
         } catch (Exception ex) {
-            logger.error(ex);
+            logger.error("Error in processArtifact - " + ex.toString());
+            logger.error(ex.getStackTrace());
         }
     }
 
 
     protected void processArtifact(ArtifactInfo artifactInfo) {
         String gav = artifactInfo.groupId + ":" + artifactInfo.artifactId + ":pom:" + artifactInfo.version;
-        String msg = "send " + gav;
-        logger.info(msg);
-        System.out.println(msg);
         sendGav(gav, artifactInfo.lastModified);
     }
 
@@ -165,8 +163,8 @@ public class CentralMojo extends SuperMojo {
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
             logger.info(" [x] Sent '" + message + "'");
         } catch (Exception exception) {
-            logger.error("urlToPom: " + gav);
-            logger.error(exception);
+            logger.error("urlToPom: " + gav + " - " + exception.toString());
+            logger.error(exception.getStackTrace());
         }
     }
 
@@ -186,7 +184,8 @@ public class CentralMojo extends SuperMojo {
             logger.info(msg);
             System.out.println(msg);
         } catch (Exception exception){
-            logger.error(exception);
+            logger.error("ERROR in initTheRabbit - " + exception.toString());
+            logger.error(exception.getStackTrace());
         }
     }
 
@@ -199,7 +198,8 @@ public class CentralMojo extends SuperMojo {
             logger.info(msg);
             System.out.println(msg);
         } catch (Exception exception){
-            logger.error(exception);
+            logger.error("ERROR in closeTheRabbit - " + exception.toString());
+            logger.error(exception.getStackTrace());
         }
     }
 
