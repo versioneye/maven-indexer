@@ -45,6 +45,10 @@ project.
 
 This command will fail if you run it with a Maven version higher than 3.0.5!
 
+## Support
+
+For commercial support send an email to `support@versioneye.com`.
+
 ## License
 
 this project is licensed under the MIT license!
