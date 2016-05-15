@@ -24,7 +24,7 @@ single intance, only fill out the first 3 lines.
 
 To configure the RabbitMQ connection adjust the settings in `srm/main/resources/settings.properties`.
 
-## Maven Index Directorry Config
+## Maven Index Directory Config
 
 The Maven Indexer is downloading the maven index to a local directory. The working directory for
 that can be configured here: `srm/main/resources/settings.properties`.
