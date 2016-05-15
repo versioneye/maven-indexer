@@ -39,8 +39,8 @@
     <encoding>UTF-8</encoding>
     <surefireVersion>2.18.1</surefireVersion>
     <javaVersion>1.6</javaVersion>
-    <spring.version>4.2.5.RELEASE</spring.version>
-    <testngVersion>6.9.10</testngVersion>
+    <spring.version>4.2.6.RELEASE</spring.version>
+    <testngVersion>6.9.11</testngVersion>
     <wagonVersion>2.10</wagonVersion>
     <aetherVersion>1.13.1</aetherVersion>
   </properties>
@@ -88,7 +88,7 @@
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
-      <version>3.0.22</version>
+      <version>3.0.24</version>
     </dependency>
 
     <dependency>
@@ -173,7 +173,7 @@
       <plugin>
         <groupId>com.versioneye</groupId>
         <artifactId>versioneye-maven-plugin</artifactId>
-        <version>3.9.1</version>
+        <version>3.9.2</version>
         <configuration>
           <organisation>versioneye</organisation>
         </configuration>
