@@ -37,7 +37,7 @@ To start the crawler for Maven Central, run this command with Maven 3.0.5:
 mvn crawl:central
 ```
 
-This will fetch the maven index form Maven Central and iterate through it. If it find an
+This will fetch the maven index form Maven Central and iterate through it. If it finds an
 Artifact which is not yet in the MongoDB, it will send a message to RabbitMQ. To make this
 fully work it is required that at least 1 RabbitMQ consumer is running which is processing
 the message from this project. The code for the consumers are located in the `versioneye/crawl_j`
