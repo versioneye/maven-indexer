@@ -10,7 +10,29 @@
 
   <name>maven-indexer</name>
 
-  <url>http://maven.apache.org</url>
+  <url>https://www.versioneye.com</url>
+
+  <scm>
+    <connection>scm:git:https://github.com/versioneye/maven-indexer.git</connection>
+    <developerConnection>scm:git:https://github.com/versioneye/maven-indexer.git</developerConnection>
+    <url>https://github.com/versioneye/maven-indexer.git</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>http://choosealicense.com/licenses/mit/</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Robert Reiz</name>
+      <id>reiz</id>
+      <organization>VersionEye</organization>
+      <organizationUrl>https://www.VersionEye.com</organizationUrl>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
