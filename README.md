@@ -31,7 +31,7 @@ that can be configured here: `srm/main/resources/settings.properties`.
 
 ## Run
 
-To start the crawler for Maven Central, run this command:
+To start the crawler for Maven Central, run this command with Maven 3.0.5:
 
 ```
 mvn crawl:central
@@ -42,6 +42,8 @@ Artifact which is not yet in the MongoDB, it will send a message to RabbitMQ. To
 fully work it is required that at least 1 RabbitMQ consumer is running which is processing
 the message from this project. The code for the consumers are located in the `versioneye/crawl_j`
 project.
+
+This command will fail if you run it with a Maven version higher than 3.0.5!
 
 ## License
 
