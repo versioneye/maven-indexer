@@ -1,3 +1,5 @@
+[![Dependency Status](https://www.versioneye.com/user/projects/56d6ba3dfa908e000e348ffc/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56d6ba3dfa908e000e348ffc)
+
 # maven-indexer
 
 This Maven project is using
