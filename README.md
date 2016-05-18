@@ -18,7 +18,7 @@ fetching and parsing the actual pom file and writing the new artefact to the Ver
 
 As primary database we are using MongoDB. To make this project work you need to configure
 the MongoDB connection in `src/main/resources/mongo.properties`. If you run MongoDB as a
-single intance, only fill out the first 3 lines.
+single instance, only fill out the first 3 lines.
 
 ## RabbitMQ Config
 
