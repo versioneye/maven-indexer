@@ -34,6 +34,31 @@
     </developer>
   </developers>
 
+  <repositories>
+    <repository>
+      <id>jcenter</id>
+      <name>JCenter</name>
+      <url>http://jcenter.bintray.com/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>typesafe</id>
+      <name>typesafe</name>
+      <url>http://repo.typesafe.com/typesafe/releases/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <encoding>UTF-8</encoding>
