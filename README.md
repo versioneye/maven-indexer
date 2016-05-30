@@ -55,6 +55,17 @@ To configure the RabbitMQ connection adjust the settings in `srm/main/resources/
 The Maven Indexer is downloading the maven index to a local directory. The working directory for
 that can be configured here: `srm/main/resources/settings.properties`.
 
+## Dependencies
+
+This project relies on versioneye_persistence and versioneye_service. These projects are currently
+located in the [crawl_j](https://github.com/versioneye/crawl_j) project. Run
+
+```
+mvn install
+```
+
+on the crawl_j project to install the dependencies.
+
 ## Run
 
 To start the crawler for Maven Central, run this command with Maven 3.0.5:
