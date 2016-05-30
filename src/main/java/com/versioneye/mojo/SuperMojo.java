@@ -18,12 +18,12 @@ import org.sonatype.aether.repository.Authentication;
 import org.sonatype.aether.repository.RemoteRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import versioneye.domain.MavenRepository;
-import versioneye.domain.Repository;
-import versioneye.persistence.IGlobalSettingDao;
-import versioneye.persistence.IMavenRepostoryDao;
-import versioneye.persistence.IProductDao;
-import versioneye.utils.HttpUtils;
+import com.versioneye.domain.MavenRepository;
+import com.versioneye.domain.Repository;
+import com.versioneye.persistence.IGlobalSettingDao;
+import com.versioneye.persistence.IMavenRepostoryDao;
+import com.versioneye.persistence.IProductDao;
+import com.versioneye.utils.HttpUtils;
 
 import java.io.File;
 import java.util.List;

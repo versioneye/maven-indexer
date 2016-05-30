@@ -8,9 +8,9 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import versioneye.persistence.IMavenRepostoryDao;
-import versioneye.persistence.IProductDao;
-import versioneye.service.ProductService;
+import com.versioneye.persistence.IMavenRepostoryDao;
+import com.versioneye.persistence.IProductDao;
+import com.versioneye.service.ProductService;
 
 /**
  * Crawles clojar M2 Repository for Clojure

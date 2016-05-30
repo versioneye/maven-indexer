@@ -9,13 +9,13 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import versioneye.domain.GlobalSetting;
-import versioneye.domain.MavenRepository;
-import versioneye.domain.Repository;
-import versioneye.persistence.IGlobalSettingDao;
-import versioneye.persistence.IMavenRepostoryDao;
-import versioneye.persistence.IProductDao;
-import versioneye.service.ProductService;
+import com.versioneye.domain.GlobalSetting;
+import com.versioneye.domain.MavenRepository;
+import com.versioneye.domain.Repository;
+import com.versioneye.persistence.IGlobalSettingDao;
+import com.versioneye.persistence.IMavenRepostoryDao;
+import com.versioneye.persistence.IProductDao;
+import com.versioneye.service.ProductService;
 
 /*
     This Mojo is used in VersionEye Enterprise to crawl internal repositories.

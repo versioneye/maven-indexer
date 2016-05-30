@@ -18,8 +18,8 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import versioneye.domain.MavenRepository;
-import versioneye.service.ProductService;
+import com.versioneye.domain.MavenRepository;
+import com.versioneye.service.ProductService;
 
 import java.util.Properties;
 import java.util.concurrent.*;

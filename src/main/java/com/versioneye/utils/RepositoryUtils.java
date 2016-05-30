@@ -1,7 +1,7 @@
 package com.versioneye.utils;
 
-import versioneye.domain.MavenRepository;
-import versioneye.domain.Repository;
+import com.versioneye.domain.MavenRepository;
+import com.versioneye.domain.Repository;
 
 /**
  * Created with IntelliJ IDEA.

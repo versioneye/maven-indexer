@@ -8,7 +8,7 @@
 
     <util:properties id="mongo" location="classpath:mongo.properties"/>
 
-    <bean id="mongoDb" class="versioneye.persistence.mongodb.MongoDB" scope="singleton" >
+    <bean id="mongoDb" class="com.versioneye.persistence.mongodb.MongoDB" scope="singleton" >
         <property name="dbname" value="#{mongo['dbname']}" />
         <property name="host" value="#{mongo['host']}" />
         <property name="port" value="#{mongo['port']}" />
@@ -21,62 +21,62 @@
     </bean>
 
 
-    <bean id="httpUtils"         class="versioneye.utils.HttpUtils" />
+    <bean id="httpUtils"         class="com.versioneye.utils.HttpUtils" />
 
-    <bean id="productService"         class="versioneye.service.ProductService" />
+    <bean id="productService"         class="com.versioneye.service.ProductService" />
 
-    <bean id="productDao"          class="versioneye.persistence.mongodb.ProductDao" >
+    <bean id="productDao"          class="com.versioneye.persistence.mongodb.ProductDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
-    <bean id="pomDao"          class="versioneye.persistence.mongodb.PomDao" >
+    <bean id="pomDao"          class="com.versioneye.persistence.mongodb.PomDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
-    <bean id="globalSettingDao"          class="versioneye.persistence.mongodb.GlobalSettingDao" >
+    <bean id="globalSettingDao"          class="com.versioneye.persistence.mongodb.GlobalSettingDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
-    <bean id="mavenRepositoryDao"          class="versioneye.persistence.mongodb.MavenRepositoryDao" >
+    <bean id="mavenRepositoryDao"          class="com.versioneye.persistence.mongodb.MavenRepositoryDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
-    <bean id="productResourceDao"          class="versioneye.persistence.mongodb.ProductResourceDao" >
+    <bean id="productResourceDao"          class="com.versioneye.persistence.mongodb.ProductResourceDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
-    <bean id="crawleDao"           class="versioneye.persistence.mongodb.CrawleDao" >
+    <bean id="crawleDao"           class="com.versioneye.persistence.mongodb.CrawleDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
-    <bean id="errorDao"           class="versioneye.persistence.mongodb.ErrorDao" >
+    <bean id="errorDao"           class="com.versioneye.persistence.mongodb.ErrorDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
 
     <!-- Start Maven Repositories -->
 
     <!-- MIRROR in California -->
-    <bean id="ibiblio" class="versioneye.domain.Repository" >
+    <bean id="ibiblio" class="com.versioneye.domain.Repository" >
         <property name="name"     value="Ibiblio" />
         <property name="src"      value="http://mirrors.ibiblio.org/maven2/" />
         <property name="repoType" value="Maven2" />
     </bean>
 
     <!-- MIRROR in France -->
-    <bean id="antelink" class="versioneye.domain.Repository" >
+    <bean id="antelink" class="com.versioneye.domain.Repository" >
         <property name="name"     value="antelink" />
         <property name="src"      value="http://maven.antelink.com/content/repositories/central/" />
         <property name="repoType" value="Maven2" />
     </bean>
 
-    <bean id="mavenCentral" class="versioneye.domain.Repository" >
+    <bean id="mavenCentral" class="com.versioneye.domain.Repository" >
         <property name="name"     value="MavenCentral" />
         <property name="src"      value="http://search.maven.org/" />
         <property name="repoType" value="Maven2" />
     </bean>
 
-    <bean id="clojars" class="versioneye.domain.Repository" >
+    <bean id="clojars" class="com.versioneye.domain.Repository" >
         <property name="name"     value="CloJars" />
         <property name="src"      value="https://clojars.org/repo" />
         <property name="repoType" value="Maven2" />
         <property name="language" value="Clojure" />
     </bean>
 
-    <bean id="sprayio" class="versioneye.domain.Repository" >
+    <bean id="sprayio" class="com.versioneye.domain.Repository" >
         <property name="name"     value="sprayio" />
         <property name="src"      value="http://repo.spray.io" />
         <property name="repoType" value="Maven2" />
