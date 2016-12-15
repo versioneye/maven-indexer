@@ -69,8 +69,8 @@
     <encoding>UTF-8</encoding>
     <surefireVersion>2.18.1</surefireVersion>
     <javaVersion>1.6</javaVersion>
-    <spring.version>4.3.3.RELEASE</spring.version>
-    <testngVersion>6.9.13.6</testngVersion>
+    <spring.version>4.3.4.RELEASE</spring.version>
+    <testngVersion>6.10</testngVersion>
     <wagonVersion>2.10</wagonVersion>
     <aetherVersion>1.13.1</aetherVersion>
   </properties>
@@ -176,7 +176,7 @@
     <dependency>
       <groupId>com.rabbitmq</groupId>
       <artifactId>amqp-client</artifactId>
-      <version>3.6.5</version>
+      <version>4.0.0</version>
     </dependency>
 
     <dependency>
