@@ -92,7 +92,7 @@ public class CentralMojo extends SuperMojo {
 
     protected void processArtifact(IndexingContext context, IndexReader indexReader, int i) {
         try {
-            if (i % 1000 == 0){
+            if (i % 100000 == 0){
                 logger.info("curser i: " + i);
             }
 
