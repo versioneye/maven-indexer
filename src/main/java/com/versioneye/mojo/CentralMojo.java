@@ -66,9 +66,11 @@ public class CentralMojo extends SuperMojo {
             String centralCache = getCacheDirectory(mavenRepository.getName());
             String centralIndex = getIndexDirectory(mavenRepository.getName());
 
+            logger.info("Init mavenIndexer with " + centralCache + " and " + centralIndex);
             MavenIndexer mavenIndexer = new MavenIndexer();
             mavenIndexer.initCentralContext(mavenRepository.getUrl(), centralCache, centralIndex);
             mavenIndexer.updateIndex(mavenRepository.getUsername(), mavenRepository.getPassword());
+            logger.info("Updating Index is finished");
 
             IndexingContext context = mavenIndexer.getCentralContext();
             IndexSearcher searcher  = context.acquireIndexSearcher();
