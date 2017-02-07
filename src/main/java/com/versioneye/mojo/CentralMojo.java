@@ -2,6 +2,7 @@ package com.versioneye.mojo;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import com.versioneye.domain.Artefact;
 import com.versioneye.maven.MavenIndexer;
 import com.versioneye.service.RabbitMqService;
 import org.apache.logging.log4j.LogManager;
@@ -100,10 +101,13 @@ public class CentralMojo extends SuperMojo {
                 return ;
 
             final Document doc = indexReader.document( i );
-            final ArtifactInfo artifactInfo = IndexUtils.constructArtifactInfo( doc, context );
+            final ArtifactInfo artifactInfo = IndexUtils.constructArtifactInfo(doc, context);
             if (artifactInfo == null || artifactInfo.groupId == null || artifactInfo.artifactId == null){
                 return ;
             }
+
+            createIfNotExist(artifactInfo, artifactInfo.sha1, "sha1");
+            createIfNotExist(artifactInfo, artifactInfo.md5, "md5");
 
             if (skipKnown && productDao.doesVersionExistAlreadyByGA(artifactInfo.groupId.toLowerCase(), artifactInfo.artifactId.toLowerCase(), artifactInfo.version)){
                 return ;
@@ -219,6 +223,35 @@ public class CentralMojo extends SuperMojo {
             mavenRepository.setUrl("http://repo.maven.apache.org/maven2");
             mavenRepository.setLanguage("Java");
         }
+    }
+
+
+    protected void createIfNotExist( ArtifactInfo artifactInfo, String sha_value, String sha_method ){
+        if (sha_value == null || sha_value.isEmpty()){
+            return ;
+        }
+        Artefact artefact = artefactDao.getBySha(sha_value);
+        if (artefact != null) {
+            logger.info("Exists already " + sha_method + ": " + artifactInfo.sha1 );
+            return ;
+        }
+        artefact = new Artefact();
+        updateArtefact(artefact, artifactInfo);
+        artefact.setSha_value(sha_value);
+        artefact.setSha_method(sha_method);
+        artefactDao.create(artefact);
+        logger.info("Create new " + sha_method + ": " + artifactInfo.sha1 );
+    }
+
+    protected void updateArtefact(Artefact artefact, ArtifactInfo artifactInfo){
+        artefact.setLanguage("Java");
+        artefact.setProd_key(artifactInfo.groupId + "/" + artifactInfo.artifactId);
+        artefact.setVersion(artifactInfo.version);
+        artefact.setGroup_id(artifactInfo.groupId);
+        artefact.setArtifact_id(artifactInfo.artifactId);
+        artefact.setClassifier(artifactInfo.classifier);
+        artefact.setPackaging(artifactInfo.packaging);
+        artefact.setProd_type("Maven2");
     }
 
 

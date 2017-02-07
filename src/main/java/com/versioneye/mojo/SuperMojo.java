@@ -1,5 +1,6 @@
 package com.versioneye.mojo;
 
+import com.versioneye.persistence.IArtefactDao;
 import com.versioneye.utils.PropertiesUtils;
 import com.versioneye.utils.RepositoryUtils;
 import org.apache.logging.log4j.LogManager;
@@ -66,6 +67,7 @@ public abstract class SuperMojo extends AbstractMojo {
     protected Repository repository;
     protected IMavenRepostoryDao mavenRepositoryDao;
     protected IProductDao productDao;
+    protected IArtefactDao artefactDao;
     protected IGlobalSettingDao globalSettingDao;
     protected ApplicationContext context;
 
@@ -74,6 +76,7 @@ public abstract class SuperMojo extends AbstractMojo {
             context = new ClassPathXmlApplicationContext("applicationContext.xml");
             mavenRepositoryDao = (IMavenRepostoryDao) context.getBean("mavenRepositoryDao");
             productDao = (IProductDao) context.getBean("productDao");
+            artefactDao = (IArtefactDao) context.getBean("artefactDao");
             globalSettingDao = (IGlobalSettingDao) context.getBean("globalSettingDao");
             httpUtils = (HttpUtils) context.getBean("httpUtils");
         } catch (Exception ex){

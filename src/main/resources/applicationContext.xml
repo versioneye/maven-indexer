@@ -46,6 +46,9 @@
     <bean id="errorDao"           class="com.versioneye.persistence.mongodb.ErrorDao" >
         <property name="mongoDB" ref="mongoDb" />
     </bean>
+    <bean id="artefactDao"           class="com.versioneye.persistence.mongodb.ArtefactDao" >
+        <property name="mongoDB" ref="mongoDb" />
+    </bean>
 
     <!-- Start Maven Repositories -->
 
