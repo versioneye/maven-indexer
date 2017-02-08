@@ -22,6 +22,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.versioneye.domain.MavenRepository;
 import com.versioneye.service.ProductService;
 
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.*;
 
@@ -239,6 +240,7 @@ public class CentralMojo extends SuperMojo {
         updateArtefact(artefact, artifactInfo);
         artefact.setSha_value(sha_value);
         artefact.setSha_method(sha_method);
+        artefact.setUpdatedAt(new Date());
         artefactDao.create(artefact);
         logger.info("Create new " + sha_method + ": " + artifactInfo.sha1 );
     }
