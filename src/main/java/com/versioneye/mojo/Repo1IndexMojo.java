@@ -1,6 +1,7 @@
 package com.versioneye.mojo;
 
 
+import com.versioneye.persistence.IArtefactDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -36,7 +37,8 @@ public class Repo1IndexMojo extends CentralMojo {
             mavenRepositoryDao = (IMavenRepostoryDao) context.getBean("mavenRepositoryDao");
             globalSettingDao   = (IGlobalSettingDao)  context.getBean("globalSettingDao");
 
-            productService     = (ProductService) context.getBean("productService");
+            productService = (ProductService) context.getBean("productService");
+            artefactDao    = (IArtefactDao) context.getBean("artefactDao");
 
             String env = System.getenv("RAILS_ENV");
             GlobalSetting gs = globalSettingDao.getBy(env, "mvn_repo_1_type");
