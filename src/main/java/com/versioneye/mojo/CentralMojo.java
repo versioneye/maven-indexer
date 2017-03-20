@@ -21,6 +21,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.versioneye.domain.MavenRepository;
 import com.versioneye.service.ProductService;
+import sun.jvm.hotspot.StackTrace;
 
 import java.util.Date;
 import java.util.Properties;
@@ -55,7 +56,7 @@ public class CentralMojo extends SuperMojo {
 
             doUpdateFromIndex();
         } catch( Exception exception ){
-            logger.error(exception.getStackTrace());
+            logger.error(exception);
             throw new MojoExecutionException("Oh no! Something went wrong. Get in touch with the VersionEye guys and give them feedback.", exception);
         }
     }
@@ -86,8 +87,8 @@ public class CentralMojo extends SuperMojo {
 
             closeTheRabbit();
         } catch (Exception ex){
-            logger.error(ex);
             logger.error("ERROR in doUpdateFromIndex" + ex.getMessage());
+            logger.error("ERROR in doUpdateFromIndex", ex);
         }
     }
 
@@ -117,7 +118,7 @@ public class CentralMojo extends SuperMojo {
             processArtifact(artifactInfo);
         } catch (Exception ex) {
             logger.error("Error in processArtifact - " + ex.toString());
-            logger.error(ex.getStackTrace());
+            logger.error("Error in processArtifact - ", ex);
         }
     }
 
@@ -175,7 +176,7 @@ public class CentralMojo extends SuperMojo {
             logger.info(" [x] Sent '" + message + "'");
         } catch (Exception exception) {
             logger.error("urlToPom: " + gav + " - " + exception.toString());
-            logger.error(exception.getStackTrace());
+            logger.error("Exception in sendGav - ", exception);
         }
     }
 
@@ -196,7 +197,7 @@ public class CentralMojo extends SuperMojo {
             System.out.println(msg);
         } catch (Exception exception){
             logger.error("ERROR in initTheRabbit - " + exception.toString());
-            logger.error(exception.getStackTrace());
+            logger.error("ERROR in initTheRabbit - ", exception);
         }
     }
 
@@ -209,8 +210,7 @@ public class CentralMojo extends SuperMojo {
             logger.info(msg);
             System.out.println(msg);
         } catch (Exception exception){
-            logger.error("ERROR in closeTheRabbit - " + exception.toString());
-            logger.error(exception.getStackTrace());
+            logger.error("ERROR in closeTheRabbit - ", exception.getStackTrace());
         }
     }
 
