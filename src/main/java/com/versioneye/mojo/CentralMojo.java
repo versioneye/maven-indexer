@@ -21,7 +21,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.versioneye.domain.MavenRepository;
 import com.versioneye.service.ProductService;
-import sun.jvm.hotspot.StackTrace;
 
 import java.util.Date;
 import java.util.Properties;
