@@ -233,7 +233,6 @@ public class CentralMojo extends SuperMojo {
             }
             Artefact artefact = artefactDao.getBySha(sha_value);
             if (artefact != null) {
-                logger.info("Exists already " + sha_method + ": " + artifactInfo.sha1 );
                 return ;
             }
             artefact = new Artefact();
@@ -242,7 +241,7 @@ public class CentralMojo extends SuperMojo {
             artefact.setSha_method(sha_method);
             artefact.setUpdatedAt(new Date());
             artefactDao.create(artefact);
-            logger.info("Create new " + sha_method + ": " + artifactInfo.sha1 );
+            logger.info("New SHA value " + sha_method + ": " + artifactInfo.sha1 );
         } catch (Exception ex) {
             logger.error("ERROR in createIfNotExist - ", ex);
         }
