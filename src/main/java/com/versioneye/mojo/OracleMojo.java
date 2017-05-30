@@ -13,10 +13,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-@Mojo( name = "seventu", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
-public class SeventuMojo extends CentralMojo {
+@Mojo( name = "oracle", defaultPhase = LifecyclePhase.PROCESS_SOURCES )
+public class OracleMojo extends CentralMojo {
 
-    static final Logger logger = LogManager.getLogger(SprayioMojo.class.getName());
+    static final Logger logger = LogManager.getLogger(ClojarsMojo.class.getName());
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         try{
@@ -25,11 +25,12 @@ public class SeventuMojo extends CentralMojo {
             mavenRepositoryDao = (IMavenRepostoryDao) context.getBean("mavenRepositoryDao");
             productDao = (IProductDao) context.getBean("productDao");
 
-            mavenRepository = mavenRepositoryDao.findByName("seventu");
-
+            mavenRepository = mavenRepositoryDao.findByName("oracle");
             addRepo(mavenRepository);
 
+            logger.info("Start to update Jenkins index");
             super.doUpdateFromIndex();
+            logger.info("Finished update Jenkins index");
         } catch( Exception exception ){
             logger.error(exception);
             throw new MojoExecutionException("Oh no! Something went wrong. Get in touch with the VersionEye guys and give them feedback.", exception);
